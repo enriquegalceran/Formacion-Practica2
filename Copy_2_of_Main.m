@@ -1,5 +1,5 @@
 tic  %13644
-dinfo = dir(['Data\', '*.txt']);
+dinfo = dir(['Variables\', '*.mat']);
 n_data = 45-32+1;
 % ListaBuenos = zeros(8, 3, n_data);
 ListaBuenosCompletos = zeros(3, n_data);
@@ -7,7 +7,7 @@ resoluciones = [50 100 400 800 1000 1500 2000 2500];
 radios = [1 2 3 3 4 5 7 10];
 sigmas = [0.5 1 1 2 2.5 3 5 5];
 % Tiempo_pasado = zeros(8,n_data);
-for Q = 8:8
+for Q = 4:4
     resolucion = resoluciones(Q);
     K_dib = 0;
     radio = radios(Q);
@@ -33,7 +33,7 @@ for Q = 8:8
     MallaNalto = MallaNalto/N_Nalto;
     MallaNaltoConv = CapaConvolucion(MallaNalto, radio, sigma);
     
-    for K = 32:45
+    for K = 34:47
         tic
         filename = dinfo(K).name;
 

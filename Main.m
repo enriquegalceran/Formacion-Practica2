@@ -1,4 +1,4 @@
-filename = '_24329'; %0 te lleva al más reciente
+filename = '_13644'; %0 te lleva al más reciente
 
 % ENCONTRADO! 13644
 % 8, 0, 7.25, 7.25, 7.5, 7.5, 12.9, 12.9, 13, 0, 0, 5, 5, 0, 0, 10, 10
@@ -60,6 +60,6 @@ legend(filename, 'Nbajo')
 
 toc
 resolucion = 800;
-radio = 2;
-sigma = 1;
+radio = 3;
+sigma = 2;
 Sacar_Eficacia

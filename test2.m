@@ -4,7 +4,7 @@
 % Matriz_ancha = zeros(res);
 % Matriz_random = round(rand(res)-0.3,0);
 % num_rand = sum(Matriz_random(:));
-% figure(1)
+% figure(10)
 % heatmap(Matriz_random);
 % title(num_rand)
 % grid off
@@ -44,7 +44,7 @@
 % 
 % conv = CapaConvolucion(Matriz_random, radio, sigma);
 % 
-% figure(2)
+% figure(11)
 % heatmap(conv);
 % title(sprintf('radio: %i - sigma: %i', radio,sigma))
 % grid off
@@ -53,7 +53,7 @@
 
 
 
-radio = 3; sigma = 0.5;
+radio = 1; sigma = 1;
 long = 20;
 X = zeros(1,long); Xconv = X;
 Y = X; Yconv = X;
@@ -62,15 +62,18 @@ W = X; Wconv = X;
 
 X(5) = 1; X(7) = 1; X(12) = 1;
 Y(5) = 0.8; Y(6) = 2; Y(7) = 0.6; Y(8) = 0.5; Y(13) = 1;
-Z(1) = 2; Z(5) = 2; Z(10) = 1; Z(18) = 2;
-W(5) = 0.9; W(7) = 1.2; W(8) = 0.1; W(11) = 0.5; W(12) = 0.7; 
+Z(5) = 2; Z(10) = 1; Z(16) = 2; Z(15) = 2;
+W(5) = 0.9; W(7) = 1.2; W(8) = 0.1; W(11) = 0.5; W(12) = 0.7;
+valor_max = max([X,Y,Z,W]) * 1.1;
 %%%%%%%%%%
-figure(3)
+figure(12)
 clf
 subplot(4,2,1)
 plot(X)
 Xog = X;
 X = X/sum(X);
+ylim([0, valor_max])
+title('Comparación sin Convolución')
 subplot(4,2,2)
 for k = 1+radio:long-radio
     for l = k-radio:k+radio
@@ -78,15 +81,14 @@ for k = 1+radio:long-radio
     end
 end
 plot(Xconv)
-
+title('Comparación con Convolución')
 %%%%%%%%%%
 subplot(4,2,3)
-hold on
 plot(Y)
-plot(Xog)
 Y = Y/sum(Y);
 diferencia = sum(abs(X-Y));
 title(diferencia)
+ylim([0, valor_max])
 subplot(4,2,4)
 for k = 1+radio:long-radio
     for l = k-radio:k+radio
@@ -98,12 +100,11 @@ diferencia = sum(abs(Xconv-Yconv));
 title(diferencia)
 %%%%%%%%%
 subplot(4,2,5)
-hold on
 plot(Z)
-plot(Xog)
 Z = Z/sum(Z);
 diferencia = sum(abs(X-Z));
 title(diferencia)
+ylim([0, valor_max])
 subplot(4,2,6)
 for k = 1+radio:long-radio
     for l = k-radio:k+radio
@@ -115,12 +116,11 @@ diferencia = sum(abs(Xconv-Zconv));
 title(diferencia)
 %%%%%%%%%
 subplot(4,2,7)
-hold on
 plot(W)
-plot(Xog)
 W = W/sum(W);
 diferencia = sum(abs(X-W));
 title(diferencia)
+ylim([0, valor_max])
 subplot(4,2,8)
 for k = 1+radio:long-radio
     for l = k-radio:k+radio
@@ -131,4 +131,15 @@ plot(Wconv)
 diferencia = sum(abs(Xconv-Wconv));
 title(diferencia)
 
+valor_maximo_conv = max([Xconv, Yconv, Zconv, Wconv]) * 1.1;
+subplot(4,2,2)
+ylim([0, valor_maximo_conv])
+subplot(4,2,4)
+ylim([0, valor_maximo_conv])
+subplot(4,2,6)
+ylim([0, valor_maximo_conv])
+subplot(4,2,8)
+ylim([0, valor_maximo_conv])
 sgtitle(sprintf('radio: %i - sigma: %1.2f', radio, sigma))
+
+saveas(gcf, sprintf('Comparacion 1D convolucion %i-%1.1f.png', radio, sigma))
