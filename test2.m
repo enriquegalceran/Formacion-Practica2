@@ -1,53 +1,53 @@
 %test Normal convolucion
 %% Matriz aleatroria
-% res = 50;
-% Matriz_ancha = zeros(res);
+res = 50;
+Matriz_ancha = zeros(res);
 % Matriz_random = round(rand(res)-0.3,0);
-% num_rand = sum(Matriz_random(:));
-% figure(10)
-% heatmap(Matriz_random);
-% title(num_rand)
-% grid off
+num_rand = sum(Matriz_random(:));
+figure(10)
+heatmap(Matriz_random);
+title(num_rand)
+grid off
+
+% coordenadas = zeros(2,num_rand);
+% k = 1;
+% for i = 1:res
+%     for j = 1:res
+%         if Matriz_random(i,j) == 1
+%             coordenadas(1,k) = i;
+%             coordenadas(2,k) = j;
+%             k = k + 1;
+%         end
+%     end
+% end
 % 
-% % coordenadas = zeros(2,num_rand);
-% % k = 1;
-% % for i = 1:res
-% %     for j = 1:res
-% %         if Matriz_random(i,j) == 1
-% %             coordenadas(1,k) = i;
-% %             coordenadas(2,k) = j;
-% %             k = k + 1;
-% %         end
-% %     end
-% % end
-% % 
-% % figure(2)
-% % plot(coordenadas(1,:), coordenadas(2,:), '.')
-% 
-% radio = 1;
-% sigma = 2;
-% % conv = zeros(res);
-% % for i = 1 + radio:res-radio
-% %     for j = 1 + radio:res-radio
-% %         
-% %         for m = i-radio:i+radio
-% %             for n = j-radio:j+radio
-% % %                 conv(i,j) = conv(i,j) + Matriz_random(m,n)/(1+sqrt((m-i)^2+(n-j)^2)); %valor/(1+dist)
-% %                 conv(i,j) = conv(i,j) + Matriz_random(m,n)*normpdf(sqrt((m-i)^2+(n-j)^2),0,sigma);
-% %                 
-% %                 
-% %             end
-% %         end
-% %         
-% %     end 
-% % end
-% 
-% conv = CapaConvolucion(Matriz_random, radio, sigma);
-% 
-% figure(11)
-% heatmap(conv);
-% title(sprintf('radio: %i - sigma: %i', radio,sigma))
-% grid off
+% figure(2)
+% plot(coordenadas(1,:), coordenadas(2,:), '.')
+
+radio = 2;
+sigma = 1;
+% conv = zeros(res);
+% for i = 1 + radio:res-radio
+%     for j = 1 + radio:res-radio
+%         
+%         for m = i-radio:i+radio
+%             for n = j-radio:j+radio
+% %                 conv(i,j) = conv(i,j) + Matriz_random(m,n)/(1+sqrt((m-i)^2+(n-j)^2)); %valor/(1+dist)
+%                 conv(i,j) = conv(i,j) + Matriz_random(m,n)*normpdf(sqrt((m-i)^2+(n-j)^2),0,sigma);
+%                 
+%                 
+%             end
+%         end
+%         
+%     end 
+% end
+
+conv = CapaConvolucion(Matriz_random, radio, sigma);
+
+figure(11)
+heatmap(conv);
+title(sprintf('radio: %i - sigma: %i', radio,sigma))
+grid off
 
 %% 1D
 

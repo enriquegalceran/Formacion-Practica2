@@ -7,7 +7,7 @@ resoluciones = [50 100 400 800 1000 1500 2000 2500];
 radios = [1 2 3 3 4 5 7 10];
 sigmas = [0.5 1 1 2 2.5 3 5 5];
 % Tiempo_pasado = zeros(8,n_data);
-for Q = 4:4
+for Q = 1:2
     resolucion = resoluciones(Q);
     K_dib = 0;
     radio = radios(Q);
@@ -33,7 +33,7 @@ for Q = 4:4
     MallaNalto = MallaNalto/N_Nalto;
     MallaNaltoConv = CapaConvolucion(MallaNalto, radio, sigma);
     
-    for K = 34:47
+    for K = 32:40
         tic
         filename = dinfo(K).name;
 
@@ -73,7 +73,7 @@ for Q = 4:4
         plot(Color, -BandaI, '.', 'MarkerSize', 2)
         xlabel 'V-I'
         ylabel 'I'
-        title(sprintf('%s - %i', filename, NData))
+        title(sprintf('%s - %i - %i', filename(5:end-4), NData, resolucion))
 
         hold on 
 
@@ -91,8 +91,18 @@ for Q = 4:4
         ListaBuenosCompletos(:,K_dib) = [str2num(filename(5:end-4)); Total; NData];
         Tiempo_pasado(Q,K_dib) = time_elapsed;
         drawnow
-
-    %     w = waitforbuttonpress;
+        saveas(gcf, sprintf('Imagenes/Imagen-%s-%i.png', filename(5:end-4),resolucion))
+        
+        figure(2)
+        clf
+        colormap(bone)
+        h = heatmap(MallaDif);
+        colorbar
+        grid off
+        title(Total)
+        drawnow
+        saveas(gcf, sprintf('Imagenes/Figura-%s-%i.png', filename(5:end-4),resolucion))
+%         w = waitforbuttonpress;
     end
 [~,inx]=sort(ListaBuenosCompletos(2,:));
 ListaBuenos(Q,:,:) = ListaBuenosCompletos(:,inx);

@@ -17,8 +17,8 @@ for J = 1:length(Mirar)
 %     K = Mirar(J);
 %     filename = dinfo(K).name;
 %     filename = 'cmd_Nalto.mat';
-%     load(sprintf('Variables/cmd%s.mat', filename(4:end-4)));
-    load(sprintf('Variables/cmd%s.mat', filename));
+    load(sprintf('Variables/cmd%s.mat', filename(4:end-4)));
+%     load(sprintf('Variables/cmd%s.mat', filename));
 % resolucion = 1500;
     BandaI = Data(:,19);
     BandaV = Data(:,17);
