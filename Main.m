@@ -56,7 +56,7 @@ BandaI = Data(:,19);
 BandaV = Data(:,17);
 Color = BandaV-BandaI;
 plot(Color, -BandaI, '.', 'MarkerSize', 2)
-legend(filename, 'Nbajo')
+legend(filename, 'Nalto')
 
 toc
 resolucion = 800;
